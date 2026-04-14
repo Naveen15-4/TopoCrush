@@ -5,7 +5,7 @@ LatticeFlow is a two-stage machine learning framework designed to accelerate the
 Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) Voronoi absorbers, this pipeline achieves design iterations in seconds rather than hours.
 This project validated this framework by optimizing the seed point locations of Voronoi Structure, these seed points are the primary design variable that defines the geometry of the structure. Hence the RL agent used this as the primary optimizing variable. 
       
-      Status:The Project is undergoing imprment, specifically to the GNN (MGN) Model. 
+      Status:The Project is undergoing improvements specifically to the GNN (MGN) Model. 
              This framework can be adpated to any problems involving discretization of domains, however the currenly the model supports Quasi-static loads and 2D geomentries.
 
 
