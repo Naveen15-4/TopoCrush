@@ -1,6 +1,6 @@
 # TopoCrush GNN Surrogate & RL Optimization for Crashworthiness
 
-TopoCrush is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing Voronoi structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. LatticeFlow bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
+TopoCrush is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing Voronoi structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. TopoCrush bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
 
 Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) Voronoi absorbers, this pipeline achieves design iterations in seconds rather than hours.
 This project validated this framework by optimizing the seed point locations of Voronoi Structure, these seed points are the primary design variable that defines the geometry of the structure. Hence the RL agent used this as the primary optimizing variable. 
@@ -20,7 +20,7 @@ This project validated this framework by optimizing the seed point locations of 
 The pipeline is split into two distinct stages:
 
 <p align="center">
-  <img src="assets/pipeline.png" alt="LatticeFlow Pipeline" width="900"/>
+  <img src="assets/pipeline.png" alt="TopoCrush Pipeline" width="900"/>
 </p>
 
 ### Stage 1: The Physics Surrogate (MeshGraphNet)
@@ -30,7 +30,7 @@ Instead of solving differential equations, we train a MeshGraphNet (MGN) to unde
 
 $$\mathbf{x}_i^t = \text{MLP}_{\text{enc}}\left(\left[\ \mathbf{v}_i^{t-1},\ \mathbf{v}_i^{t},\ m_i^{-1},\ \mathbf{f}_i\ \right]\right)$$
 
-* **Gated Message Passing**: A common issue in deep GNNs is "over-smoothing," where node features become indistinguishable after many layers. To preserve localized physical phenomena (like buckling or sharp impacts) across 15 interaction layers, LatticeFlow utilizes a gated update mechanism. The gate acts as a valve, learning exactly how much new information to blend into the existing state:
+* **Gated Message Passing**: A common issue in deep GNNs is "over-smoothing," where node features become indistinguishable after many layers. To preserve localized physical phenomena (like buckling or sharp impacts) across 15 interaction layers, TopoCrush utilizes a gated update mechanism. The gate acts as a valve, learning exactly how much new information to blend into the existing state:
 
 $$\mathbf{c} = \text{MLP}_{\text{update}}(\mathbf{x}_{\text{in}}), \quad g = \sigma\left(\text{MLP}_{\text{gate}}(\mathbf{x}_{\text{in}})\right)$$
 
@@ -58,7 +58,7 @@ $$r_t = \text{CFE}(\mathbf{p}_{t+1}) - \text{CFE}(\mathbf{p}_t)$$
 
 $$\log \pi_\theta(\mathbf{a} \mid \mathbf{s}) = \sum_{d=1}^{2K} \left[\log \mathcal{N}(u_d \mid \mu_d, \sigma_d^2) - \log(1 - \tanh^2(u_d)) - \log(a_{\max})\right]$$
 
-* **Phasic Updates for Stability**: Standard PPO updates the policy and value functions simultaneously, which can destabilize learning when evaluating highly sensitive geometric structures. LatticeFlow decouples this into phases: fitting the critic, refining advantages, and updating the policy with a corrected entropy bonus that accounts for the $\tanh$ action-space compression:
+* **Phasic Updates for Stability**: Standard PPO updates the policy and value functions simultaneously, which can destabilize learning when evaluating highly sensitive geometric structures. TopoCrush decouples this into phases: fitting the critic, refining advantages, and updating the policy with a corrected entropy bonus that accounts for the $\tanh$ action-space compression:
 
 $$\mathcal{L}_\pi = -\frac{1}{\lvert\mathcal{B}\rvert}\sum_{i \in \mathcal{B}} \min\left(r_i \hat{A}_i^{\text{norm}},\ \text{clamp}(r_i, 1{-}\epsilon, 1{+}\epsilon)\ \hat{A}_i^{\text{norm}}\right) - c_H \cdot \bar{H}_a[\pi_\theta]$$
 
@@ -138,7 +138,7 @@ If you utilize this framework or code structure in your own research, please cit
   author    = {Naveen Kumar},
   title     = {TopoCrush: Graph Neural Network Surrogate and RL Optimization for Crashworthiness Design},
   year      = {2026},
-  url       = {[https://github.com/Naveen15-4/LatticeFlow](https://github.com/Naveen15-4/LatticeFlow)}
+  url       = {[https://github.com/Naveen15-4/TopoCrush](https://github.com/Naveen15-4/TopoCrush)}
 }
 ```
 
