@@ -1,8 +1,14 @@
 # LatticeFlow: GNN Surrogate & RL Optimization for Crashworthiness
 
-LatticeFlow is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. LatticeFlow bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
+LatticeFlow is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing Voronoi structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. LatticeFlow bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
 
-Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) absorbers, this pipeline achieves design iterations in seconds rather than hours.
+Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) Voronoi absorbers, this pipeline achieves design iterations in seconds rather than hours.
+This project validated this framework by optimizing the seed point locations of Voronoi Structure, these seed points are the primary design variable that defines the geometry of the structure. Hence the RL agent used this as the primary optimizing variable. The Project is undergoing imprment, specifically to the GNN (MGN) Model.
+This validation proves this framework can be adpated to any problems involving discretization of domains.
+
+NOTE: Voronoi structure is a geometric pattern created by scattering points (called "seeds") across a space and drawing borders exactly halfway between them.
+      The defining rule is simple: every location inside a specific cell is closer to its own seed than to any other seed.
+      In nature, you see this pattern in soap bubbles, leaf veins, and giraffe spots. In engineering, these irregular, foam-like lattices are heavily used to design                materials that are lightweight but exceptionally good at absorbing energy and distributing stress. 
 
 ---
 
@@ -11,7 +17,7 @@ Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU)
 The pipeline is split into two distinct stages:
 
 <p align="center">
-  <img src="assets/pipeline.png" alt="LatticeFlow Pipeline" width="800"/>
+  <img src="assets/pipeline.png" alt="LatticeFlow Pipeline" width="900"/>
 </p>
 
 ### Stage 1: The Physics Surrogate (MeshGraphNet)
@@ -61,21 +67,21 @@ $$\mathcal{L}_\pi = -\frac{1}{\lvert\mathcal{B}\rvert}\sum_{i \in \mathcal{B}} \
 The surrogate model successfully predicts hundreds of frames of deformation from a single initial state autoregressively.
 
 <p align="center">
-  <img src="assets/rollout_animation.gif" alt="Crash Rollout" width="700"/>
+  <img src="assets/rollout_animation.gif" alt="Crash Rollout" width="750"/>
 </p>
 
 This closely tracks the ground truth reaction forces extracted from traditional FEA solvers:
 
 <p align="center">
-  <img src="assets/reaction_force_for_rollout_animation_comparison.png" alt="Ground Truth Reaction Force" width="800"/>
+  <img src="assets/reaction_force_for_rollout_animation_comparison.png" alt="Ground Truth Reaction Force" width="850"/>
 </p>
 
 ### Optimized Design
 During training, the PPG agent learns to strategically distribute the Voronoi seeds to eliminate dangerous force spikes. By spreading out the load paths, the structure absorbs energy much more smoothly.
 
 <p align="center">
-  <img src="assets/PPG_optimization_5_seeds.gif" alt="Optimization" width="550"/>
-  <img src="assets/cfe_optimized_force_curve.png" alt="Force Curve" width="550"/>
+  <img src="assets/PPG_optimization_5_seeds.gif" alt="Optimization" width="650"/>
+  <img src="assets/cfe_optimized_force_curve.png" alt="Force Curve" width="650"/>
 </p>
 
 ---
