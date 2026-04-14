@@ -1,6 +1,6 @@
-# LatticeFlow: GNN Surrogate & RL Optimization for Crashworthiness
+# TopoCrush GNN Surrogate & RL Optimization for Crashworthiness
 
-LatticeFlow is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing Voronoi structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. LatticeFlow bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
+TopoCrush is a two-stage machine learning framework designed to accelerate the design and optimization of crash-absorbing Voronoi structures. Traditional crashworthiness design relies on Finite Element Analysis (FEA), which is computationally expensive and slow. LatticeFlow bypasses this bottleneck by replacing the FEA solver with a **Graph Neural Network (GNN)** surrogate, which is then used as a high-speed physics environment for a **Reinforcement Learning (RL)** agent to optimize the structure's geometry.
 
 Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) Voronoi absorbers, this pipeline achieves design iterations in seconds rather than hours.
 This project validated this framework by optimizing the seed point locations of Voronoi Structure, these seed points are the primary design variable that defines the geometry of the structure. Hence the RL agent used this as the primary optimizing variable. 
