@@ -5,14 +5,13 @@ TopoCrush is a two-stage machine learning framework designed to accelerate the d
 Currently optimized for 2D quasistatic crush of Thermoplastic Polyurethane (TPU) Voronoi absorbers, this pipeline achieves design iterations in seconds rather than hours.
 This project validated this framework by optimizing the seed point locations of Voronoi Structure, these seed points are the primary design variable that defines the geometry of the structure. Hence the RL agent used this as the primary optimizing variable. 
       
-      Status:The Project is undergoing improvements specifically to the GNN (MGN) Model. 
-             This framework can be adpated to any problems involving discretization of domains, however the currenly the model supports Quasi-static loads and 2D geomentries.
+      Status:This in an active Project, undergoing improvements specifically to the GNN (MGN) Model. 
+             This framework can be adpated to any problems involving discretization of domains, however the current the model supports Quasi-static loads and 2D geomentries.
 
-
-      NOTE: Voronoi structure is a geometric pattern created by scattering points (called "seeds") across a space and drawing borders exactly halfway between them.
+      Def: Voronoi structure is a geometric pattern created by scattering points (called "seeds") across a space and drawing borders exactly halfway between them.
       The defining rule is simple: every location inside a specific cell is closer to its own seed than to any other seed.
       In nature, you see this pattern in soap bubbles, leaf veins, and giraffe spots. 
-      In engineering, these irregular, foam-like lattices are heavily used to design materials that are lightweight but exceptionally good at absorbing energy and distributing stress. 
+      In engineering, these irregular, foam-like lattices are heavily used to design materials that are lightweight but exceptionally good at absorbing energy and                  distributing stress. 
 
 ---
 
